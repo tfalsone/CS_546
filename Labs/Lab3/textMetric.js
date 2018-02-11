@@ -19,7 +19,7 @@ function totalWords(text) {
   let words = text.split(' ');
   let numWords = words.length;
 
-  return numWords + ' ([' + words + '] is ' + numWords + ' words)';
+  return `${numWords} ([${words}] is ${numWords} words)`;
 }
 
 function uniqueWords(text) {
@@ -28,7 +28,7 @@ function uniqueWords(text) {
   let numUniqueWords = uniqueWords.size;
   let uniqueWordsArr = Array.from(uniqueWords);
 
-  return numUniqueWords + ' (' + uniqueWordsArr + ')';
+  return `${numUniqueWords} (${uniqueWordsArr})`;
 }
 
 function longWords(text) {
