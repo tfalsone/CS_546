@@ -62,28 +62,16 @@ function wordOccurences(text) {
   let wordOccurences = {};
   let returnStr = "";
 
-  // for (var i = 0; i < numWords; ++i) {
-  //   returnStr += uniqueWordsArr[i];
-  // }
-  // return returnStr;
-
   for (var i = 0; i < numWords; i++) {
     wordOccurences[uniqueWordsArr[i]] = 0;
   }
 
-// TODO - issue with updating wordOccurences from 0
   numWords = words.length;
+  var count, currentWord;
   for (var i = 0; i < numWords; i++) {
-    let currentWord = uniqueWords[i];
-    let count = 0;
-    if (wordOccurences[currentWord] == 0) {
-      for (var j = i; j < numWords; i++) {
-        if (words[i] == currentWord) {
-          count++;
-        }
-      }
-      wordOccurences[currentWord] = count;
-    }
+    currentWord = words[i];
+    count = wordOccurences[currentWord];
+    wordOccurences[currentWord] = count ? count + 1 : 1;
   }
 
   return wordOccurences;
@@ -107,8 +95,8 @@ module.exports = {
     let simpleText = lowerText.replace(/[^A-Za-z0-9\s]/g,'');
 
     // Convert all whitespace to simple spaces (new lines, tabs)
-    simpleText = simpleText.replace('\t',' ');
-    simpleText = simpleText.replace('\n',' ');
+    simpleText = simpleText.replace(/\s\s+/g, ' ');
+    simpleText = simpleText.replace(/\n/g, ' ');
 
     // Convert all duplicate spaces to single spaces
     simpleText = simpleText.replace(/ +(?= )/g,'');
@@ -124,14 +112,13 @@ module.exports = {
   createMetrics: (text) => {
     checkIsString(text);
 
-    let simpleText = text;
     let obj = {
-      totalLetters : totalLetters(simpleText),
-      totalWords : totalWords(simpleText),
-      uniqueWords : uniqueWords(simpleText),
-      longWords : longWords(simpleText),
-      averageWordLength : averageWordLength(simpleText),
-      wordOccurences : wordOccurences(simpleText)
+      totalLetters : totalLetters(text),
+      totalWords : totalWords(text),
+      uniqueWords : uniqueWords(text),
+      longWords : longWords(text),
+      averageWordLength : averageWordLength(text),
+      wordOccurences : wordOccurences(text)
     }
     return obj;
   }
