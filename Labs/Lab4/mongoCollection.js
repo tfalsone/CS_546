@@ -15,5 +15,5 @@ const getCollectionFn = collection => {
 
 
 module.exports = {
-  todo : getCollectionFn("todo")
+  todoItems : getCollectionFn("todoItems")
 }

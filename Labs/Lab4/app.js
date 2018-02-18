@@ -1,7 +1,7 @@
 const todos = require("./todo");
 const connection = require("./mongoConnection");
 
-const main = async () => {
+async function main() {
   const dinosaurs = await todos.createTask("Ponder Dinosaurs", "Has Anyone Really Been Far Even as Decided to Use Even Go Want to do Look More Like?");
   console.log("Dinosaurs task has been added");
   console.log(dinosaurs);
@@ -23,12 +23,16 @@ const main = async () => {
   console.log(allTodos);
 
   const pokemonId = pokemon._id;
-  const completedPokemon = await todo.completeTask(pokemonId);
+  const completedPokemon = await todos.completeTask(pokemonId);
   console.log("The pokemon task has been completed");
   console.log(completedPokemon);
 
+  await closeDb();
+}
+
+async function closeDb() {
   const db = await connection();
-  await db.close();
+  await db.serverConfig.close();
 }
 
 main();

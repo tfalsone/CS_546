@@ -1,8 +1,5 @@
-const bluebird = require("bluebird");
-const Promise = bluebird.Promise;
-
 const mongoCollections = require("./mongoCollection");
-const todo = mongoCollections.todo;
+const todoItems = mongoCollections.todoItems;
 
 const uuidv4 = require('uuid/v4');
 
@@ -10,13 +7,13 @@ async function createTask(title, description) {
   if (!title) { throw "You must provide a title for the task"; }
   if (!description) { throw "You must provide a description for the task"; }
 
-  const todoCollection = await todo();
+  const todoCollection = await todoItems();
   let newTodo = {
     _id : uuidv4(), // generate with uuid
     title : title,
     description : description,
     completed : false,
-    completedAt : NULL
+    completedAt : null
   };
 
   const insertInfo = await todoCollection.insertOne(newTodo);
@@ -28,17 +25,17 @@ async function createTask(title, description) {
 }
 
 async function getAllTasks() {
-  const todoCollection = await todo();
+  const todoCollection = await todoItems();
 
-  const todoItems = await todoCollection.find({}).toArray();
+  const todoItemList = await todoCollection.find({}).toArray();
 
-  return todoItems;
+  return todoItemList;
 }
 
 async function getTask(id) {
   if (!id) throw "You must provide an id to search for";
 
-  const todoCollection = await todo();
+  const todoCollection = await todoItems();
   const todoItem = await todoCollection.findOne({ _id: id });
   if (todoItem === null) throw "No todo item with that id";
 
@@ -46,21 +43,23 @@ async function getTask(id) {
 }
 
 async function completeTask(taskId) {
-  const todoCollection = await todo();
+  const todoCollection = await todoItems();
   const todoItem = await this.getTask(taskId);
   const id = todoItem._id;
   const title = todoItem.title;
   const description = todoItem.description;
+
+  var timestamp = Date.now()
 
   const updatedTodo = {
     _id : id,
     title : title,
     description : description,
     completed : true,
-    completedAt : Data.prototype.toLocaleFormat()
+    completedAt : timestamp
   };
 
-  const updateInfo = await todoCollection.updateOne({_id : id}, updatedTodo);
+  const updateInfo = await todoCollection.replaceOne({_id : id}, updatedTodo);
   if (updateInfo === 0) throw "Unable to update todo item";
 
   return await this.getTask(id);
@@ -69,7 +68,7 @@ async function completeTask(taskId) {
 async function removeTask(id) {
   if (!id) throw "You must provide an id to search for";
 
-  const todoCollection = await todo();
+  const todoCollection = await todoItems();
   const deletionInfo = await todoCollection.removeOne({ _id: id });
 
   if (deletionInfo.deletedCount === 0) {

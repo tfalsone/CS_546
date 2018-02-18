@@ -10,7 +10,6 @@
   "author": "Thomas Falsone 10398883",
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^3.5.1",
     "mongodb": "^3.0.2",
     "uuid": "^3.2.1"
   }
