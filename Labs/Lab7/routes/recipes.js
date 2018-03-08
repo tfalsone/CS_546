@@ -24,7 +24,9 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
     const recipePostData = req.body;
     try {
-        const {title, ingredients, steps} = recipePostData;
+        const title = recipePostData.title;
+        const ingredients = recipePostData.ingredients;
+        const steps = recipePostData.steps;
         const newRecipe = await recipeData.addRecipe(title, ingredients, steps);
         res.json(newRecipe);
     } catch (e) {

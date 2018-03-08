@@ -18,9 +18,10 @@ const exportedMethods = {
     },
     // POST
     async addRecipe(title, ingredients, steps) {
-        //if (typeof title != "string") throw "No title provided";
-        // Need more error checking?
-        
+        // Error checking
+        // if (typeof title !== "string") throw "No title provided";
+        // Need more?
+
         const recipeCollection = await recipes();
         const newRecipe = {
             _id: uuid.v4(),
@@ -29,8 +30,8 @@ const exportedMethods = {
             steps: steps
         };
 
-        const newInsertInformation = await recipeCollection.insertOne(newRecipe);
-        const newId = newInsertInformation._id; // is insertedId correct?
+        const newRecipeInfo = await recipeCollection.insertOne(newRecipe);
+        const newId = newRecipe._id;
         return await this.getRecipeById(newId);
     },
     // DELETE
