@@ -10,8 +10,10 @@
   "author": "Thomas Falsone 10398883",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "mongodb": "^3.0.4",
+    "node-uuid": "^1.4.8",
     "uuid": "^3.2.1"
   }
 }
