@@ -15,6 +15,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     try {
         const recipe = await recipeData.getRecipeById(req.params.id);
+        // console.log(recipe.title);
         res.json(recipe);
     } catch (e) {
         res.status(404).json({error: e});
@@ -22,12 +23,14 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+    console.log(req);
     const recipePostData = req.body;
+    // console.log(recipePostData);
     try {
-        const title = recipePostData.title;
-        const ingredients = recipePostData.ingredients;
-        const steps = recipePostData.steps;
+        const { title, ingredients, steps } = recipePostData;
         const newRecipe = await recipeData.addRecipe(title, ingredients, steps);
+        console.log('\n');
+        console.log(newRecipe);
         res.json(newRecipe);
     } catch (e) {
         res.status(500).json({error: e});

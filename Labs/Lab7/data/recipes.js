@@ -19,8 +19,11 @@ const exportedMethods = {
     // POST
     async addRecipe(title, ingredients, steps) {
         // Error checking
-        // if (typeof title !== "string") throw "No title provided";
-        // Need more?
+        //if (typeof title !== "string") throw "No title provided";
+        //if (!Array.isArray(ingredients)) throw "No ingredients provided";
+        //if (!Array.isArray(steps)) throw "No steps provided";
+
+        console.log(title);
 
         const recipeCollection = await recipes();
         const newRecipe = {
