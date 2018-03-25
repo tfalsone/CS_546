@@ -1,11 +1,18 @@
 const resultRoutes = require("./result");
-const mainRoutes = require("./main");
+const path = require("path");
 
 const constructorMethods = app => {
     app.use("/result", resultRoutes);
-    app.use(("/"), mainRoutes);
+
+    app.get("/", (req, res) => {
+        res.render("start", {
+            title: "The Best Palindrome Checker in the World!"
+        });
+    });
 
     app.use("*", (req, res) => {
-        res.sendStatus(404);
-    })
-}
+        res.redirect("/");
+    });
+};
+
+module.exports = constructorMethods;
