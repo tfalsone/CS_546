@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>The Best Palindrome Checker in the World!</title>
+    <link rel="stylesheet" href="./../../public/site.css">
+</head>
+
+</html>
+
+<body>
+    <main class="container">
+        <h1>The Best Palindrome Checker in the World!</h1>
+        <section class="intro">
+            <h1>What is a palindrome?</h1>
+            <p>A Palindrome is a word, phrase, or sequence that reads the same backward as forward
+                <br> Some examples include:
+                <ul>
+                    <li>Madam</li>
+                    <li>Racecare</li>
+                    <li>He did, eh?</li>
+                    <li>Poor Dan is in a droop</li>
+                </ul>
+            </p>
+        </section>
+
+        <section class="user-input">
+            <form id="static-form">
+                <label for="text-to-test">Test For a Palindrome Below:</label>
+                <br>
+                <div class="form-group hidden" id="error-container">
+                    <div class="alert alert-danger text-goes-here"></div>
+                </div>
+                <input type="text" id="text-to-test" name="phrase" autocomplete="off" value="{{palindomeText}}">
+                <br>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </section>
+
+        <section class="results">
+            <ul id="attempts" class="attempts"></ul>
+        </section>
+    </main>
+    <script src="./../../public/form.js"></script>
+</body>
+<!-- FOOTER -->
